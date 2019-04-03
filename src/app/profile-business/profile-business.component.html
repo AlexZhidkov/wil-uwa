@@ -23,7 +23,7 @@
   </mat-card-header>
   <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
   <mat-list>
-    <mat-list-item *ngFor="let eoi of eoiStudents | async" routerLink="/viewStudentEoi/{{eoi.id}}">
+    <mat-list-item *ngFor="let eoi of eoiStudents | async" routerLink="/reviewStudentEoi/{{user.uid}}/{{eoi.id}}">
       {{ eoi.student.name }}
     </mat-list-item>
   </mat-list>

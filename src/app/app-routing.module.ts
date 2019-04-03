@@ -14,6 +14,7 @@ import { ProfileStudentComponent } from './profile-student/profile-student.compo
 import { LoginComponent } from './login/login.component';
 import { UniversityComponent } from './university/university.component';
 import { UniversityTodoComponent } from './university-todo/university-todo.component';
+import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-eoi.component';
 
 const routes: Routes = [
   { path: 'university', component: UniversityComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'business/eoi/:id/:isNewProject', component: EoiBusinessComponent }, // canActivate: [AuthService] },
   { path: 'business/eoi/:eoiId', component: EoiBusinessComponent }, // canActivate: [AuthService] },
   { path: 'business/:id', component: ProjectGroupComponent },
+  { path: 'reviewStudentEoi/:uid/:id', component: ReviewStudentEoiComponent },
   { path: 'projectGroupEdit/:id', component: ProjectGroupEditComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', component: ProjectsComponent }

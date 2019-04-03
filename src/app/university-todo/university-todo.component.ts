@@ -13,10 +13,9 @@ export class UniversityTodoComponent implements OnInit {
   private todoDoc: AngularFirestoreDocument<any>;
   todo: any;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    public afs: AngularFirestore
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              public afs: AngularFirestore
   ) { }
 
   ngOnInit() {

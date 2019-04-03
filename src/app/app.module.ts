@@ -44,6 +44,7 @@ import { EoiStudentService } from './services/eoi-student.service';
 import { UniversityComponent } from './university/university.component';
 import { UniversityTodoComponent } from './university-todo/university-todo.component';
 import { UniversityTodoService } from './services/university-todo.service';
+import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-eoi.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { UniversityTodoService } from './services/university-todo.service';
     ProfileStudentComponent,
     LoginComponent,
     UniversityComponent,
-    UniversityTodoComponent
+    UniversityTodoComponent,
+    ReviewStudentEoiComponent
   ],
   entryComponents: [
     ProjectEditDialogComponent
