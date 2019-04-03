@@ -24,7 +24,7 @@
   <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
   <mat-list>
     <mat-list-item *ngFor="let eoi of eoiStudents | async" routerLink="/viewStudentEoi/{{eoi.id}}">
-      {{ eoi.title }}
+      {{ eoi.student.name }}
     </mat-list-item>
   </mat-list>
 </mat-card>

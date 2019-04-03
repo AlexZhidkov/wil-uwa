@@ -56,6 +56,11 @@ export class EoiStudentComponent implements OnInit {
     if (this.isNewProject) {
       this.afs.collection<EoiStudent>(this.eoiStudentUrl)
         .add({
+          student: {
+            id: this.user.uid,
+            name: this.user.displayName,
+            email: this.user.email
+          },
           projectId: this.projectId,
           businessId: this.businessId,
           isNew: false,
