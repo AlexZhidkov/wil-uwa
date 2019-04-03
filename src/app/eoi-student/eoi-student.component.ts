@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { EoiStudent } from '../model/eoi-student';
 import { UserProfile } from '../model/user-profile';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-eoi-student',
@@ -19,6 +17,7 @@ export class EoiStudentComponent implements OnInit {
   user: UserProfile;
   eoiStudentUrl: string;
   projectId: string;
+  businessId: string;
   eoiId: string;
   isNewProject: boolean;
   eoiDoc: AngularFirestoreDocument<EoiStudent>;
@@ -31,8 +30,8 @@ export class EoiStudentComponent implements OnInit {
   attachmentsFormGroup: FormGroup;
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router,
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private afs: AngularFirestore,
@@ -50,6 +49,7 @@ export class EoiStudentComponent implements OnInit {
     this.eoiStudentUrl = '/users/' + this.user.uid + '/eoiStudent';
 
     this.projectId = this.route.snapshot.paramMap.get('id');
+    this.businessId = this.route.snapshot.paramMap.get('businessId');
     this.eoiId = this.route.snapshot.paramMap.get('eoiId');
     this.isNewProject = (this.route.snapshot.paramMap.get('isNewProject') === 'true');
 
@@ -57,6 +57,7 @@ export class EoiStudentComponent implements OnInit {
       this.afs.collection<EoiStudent>(this.eoiStudentUrl)
         .add({
           projectId: this.projectId,
+          businessId: this.businessId,
           isNew: false,
           studyArea: '',
           why: '',
@@ -95,5 +96,13 @@ export class EoiStudentComponent implements OnInit {
   }
 
   submitEoi() {
+    this.eoiDoc.get()
+      .subscribe(eoiStudentSnapshot => {
+        const eoiStudent = eoiStudentSnapshot.data() as EoiStudent;
+        eoiStudent.submittedOn = new Date();
+        this.afs.collection<any>(`users/${this.businessId}/submittedEoiStudent`)
+          .add(eoiStudent);
+      });
+    this.router.navigateByUrl('student');
   }
 }

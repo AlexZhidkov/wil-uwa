@@ -1,6 +1,7 @@
 import { BaseEntity } from './base-entity';
 
 export interface EoiBusiness extends BaseEntity {
+    businessId: string;
     projectGroupId: string;
     isNew: boolean;
     title: string;

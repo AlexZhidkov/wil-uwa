@@ -31,7 +31,8 @@ export class UniversityTodoComponent implements OnInit {
   approveEoiBusiness() {
     this.todo.eoiBusiness.approvedByUniOn = new Date();
     this.afs.collection<any>('projects')
-      .add(this.todo.eoiBusiness);
+      .add(this.todo.eoiBusiness)
+      .then(() => this.todoDoc.delete());
     this.router.navigateByUrl('/university');
   }
 

@@ -8,7 +8,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { EoiBusiness } from '../model/eoi-business';
 import { EoiBusinessService } from '../services/eoi-business.service';
 import { UserProfile } from '../model/user-profile';
-import { environment } from 'src/environments/environment';
 import { UniversityTodoService } from '../services/university-todo.service';
 
 export interface Semester {
@@ -79,6 +78,7 @@ export class EoiBusinessComponent implements OnInit {
     if (this.isNewProject) {
       this.afs.collection<EoiBusiness>(this.eoiBusinessUrl)
         .add({
+          businessId: this.user.uid,
           projectGroupId: this.projectId,
           isNew: false,
           title: '',

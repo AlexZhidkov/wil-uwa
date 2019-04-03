@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'university/todo/:id', component: UniversityTodoComponent },
   { path: 'student', component: ProjectsComponent },
   { path: 'student/profile', component: ProfileStudentComponent }, // canActivate: [AuthService] },
-  { path: 'student/eoi/:id/:isNewProject', component: EoiStudentComponent }, // canActivate: [AuthService] },
+  { path: 'student/eoi/:id/:businessId/:isNewProject', component: EoiStudentComponent }, // canActivate: [AuthService] },
   { path: 'student/eoi/:eoiId', component: EoiStudentComponent }, // canActivate: [AuthService] },
   { path: 'student/:id', component: ProjectComponent },
   { path: 'projectEdit/:id', component: ProjectEditComponent },
