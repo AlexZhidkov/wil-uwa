@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wil-business": {
+    "wil-uwa": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wil-business:build"
+            "browserTarget": "wil-uwa:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "wil-business:build:production"
+              "browserTarget": "wil-uwa:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wil-business:build"
+            "browserTarget": "wil-uwa:build"
           }
         },
         "test": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "wil-business-e2e": {
+    "wil-uwa-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -124,11 +124,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "wil-business:serve"
+            "devServerTarget": "wil-uwa:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "wil-business:serve:production"
+              "devServerTarget": "wil-uwa:serve:production"
             }
           }
         },
@@ -144,5 +144,5 @@
       }
     }
   },
-  "defaultProject": "wil-business"
+  "defaultProject": "wil-uwa"
 }
