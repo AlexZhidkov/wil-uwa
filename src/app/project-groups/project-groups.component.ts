@@ -13,10 +13,18 @@ import { AuthService } from '../services/auth.service';
 export class ProjectGroupsComponent implements OnInit {
   projectGroups: Observable<ProjectGroup[]>;
   isLoading: boolean;
+  areas = [
+    'Marketing - Instagram',
+    'Marketing - Facebook',
+    'Marketing - Website',
+    'Science',
+    'Etc',
+    'Inspiration'
+  ];
 
   constructor(private router: Router,
-    private projectService: ProjectService,
-    private auth: AuthService) {
+              private projectService: ProjectService,
+              private auth: AuthService) {
     this.auth.isBusiness = true;
   }
 
