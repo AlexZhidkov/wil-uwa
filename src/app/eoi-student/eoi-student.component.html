@@ -5,6 +5,7 @@
     <mat-step [stepControl]="studyAreaFormGroup">
       <form [formGroup]="studyAreaFormGroup">
         <div class="form-container">
+          <ng-template matStepLabel>Student</ng-template>
           <mat-form-field>
             <p>What is your area of study/course?</p>
             <textarea matInput rows="10" formControlName="studyAreaCtrl" required
@@ -19,6 +20,7 @@
     </mat-step>
     <mat-step [stepControl]="whyFormGroup">
       <form [formGroup]="whyFormGroup">
+        <ng-template matStepLabel>Passion</ng-template>
         <div class="form-container">
           <p>In 50 words or less, why do you want to take part in work a project?</p>
           <mat-form-field>
@@ -36,6 +38,7 @@
 
     <mat-step [stepControl]="commitmentFormGroup">
       <form [formGroup]="commitmentFormGroup">
+        <ng-template matStepLabel>Values</ng-template>
         <div class="form-container">
           <p>When is a time when you have demonstrated commitment and dependability?</p>
           <mat-form-field>
@@ -52,6 +55,7 @@
     </mat-step>
     <mat-step [stepControl]="attachmentsFormGroup">
       <form [formGroup]="attachmentsFormGroup">
+        <ng-template matStepLabel>Project</ng-template>
         <div class="form-container">
           <mat-form-field>
             <input matInput placeholder="Link to Resume" formControlName="resumeUrlCtrl" required
@@ -64,7 +68,7 @@
         </div>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="eoiDoc.update({isNew: true})">Submit</button>
+          <button mat-button (click)="submitEoi()">Submit</button>
         </div>
       </form>
     </mat-step>
@@ -75,6 +79,7 @@
   <mat-horizontal-stepper #stepper *ngIf="!isLoading">
     <mat-step [stepControl]="studyAreaFormGroup">
       <form [formGroup]="studyAreaFormGroup">
+        <ng-template matStepLabel>Student</ng-template>
         <div class="form-container">
           <mat-form-field>
             <textarea matInput rows="10" placeholder="What is your area of study/course?"
@@ -89,6 +94,7 @@
     </mat-step>
     <mat-step [stepControl]="whyFormGroup">
       <form [formGroup]="whyFormGroup">
+        <ng-template matStepLabel>Passion</ng-template>
         <div class="form-container">
           <mat-form-field>
             <textarea matInput rows="10" formControlName="whyCtrl"
@@ -106,6 +112,7 @@
 
     <mat-step [stepControl]="commitmentFormGroup">
       <form [formGroup]="commitmentFormGroup">
+        <ng-template matStepLabel>Values</ng-template>
         <div class="form-container">
           <mat-form-field>
             <textarea matInput rows="10" formControlName="commitmentCtrl"
@@ -122,6 +129,7 @@
     </mat-step>
     <mat-step [stepControl]="attachmentsFormGroup">
       <form [formGroup]="attachmentsFormGroup">
+        <ng-template matStepLabel>Project</ng-template>
         <div class="form-container">
           <mat-form-field>
             <input matInput placeholder="Link to Resume" formControlName="resumeUrlCtrl" required
