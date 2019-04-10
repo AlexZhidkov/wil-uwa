@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material';
 import { EoiBusiness } from '../model/eoi-business';
 import { EoiBusinessService } from '../services/eoi-business.service';
 import { UserProfile } from '../model/user-profile';
@@ -45,6 +46,7 @@ export class EoiBusinessComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private afs: AngularFirestore,
+    private snackBar: MatSnackBar,
     private eoiBusinessService: EoiBusinessService,
     private universityTodoService: UniversityTodoService
   ) { }
@@ -146,9 +148,17 @@ export class EoiBusinessComponent implements OnInit {
       .subscribe(eoiBusinessSnapshot => {
         const eoiBusiness = eoiBusinessSnapshot.data() as EoiBusiness;
         this.universityTodoService.setCollection('universities/uwa/todo');
-        this.universityTodoService.add({ title: 'Placement request received', eoiBusiness });
+        this.universityTodoService
+          .add({ title: 'Placement request received', eoiBusiness })
+          .then(() => this.openSnackBar('Thank you for applying to your project'))
+          .catch(() => this.openSnackBar('ERROR: failed to submit application'));
       });
     this.router.navigateByUrl('business');
   }
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
+  }
 }
