@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { EoiStudent } from '../model/eoi-student';
 import { UserProfile } from '../model/user-profile';
+import { EventStoreService } from '../services/event-store.service';
 
 @Component({
   selector: 'app-eoi-student',
@@ -35,6 +36,7 @@ export class EoiStudentComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private afs: AngularFirestore,
+    private eventStoreService: EventStoreService
   ) { }
 
   ngOnInit() {
@@ -107,6 +109,15 @@ export class EoiStudentComponent implements OnInit {
         eoiStudent.submittedOn = new Date();
         this.afs.collection<any>(`users/${this.businessId}/submittedEoiStudent`)
           .add(eoiStudent);
+        this.eventStoreService
+          .add({
+            event: 'Student applied for placement',
+            user: {
+              uid: this.user.uid,
+              displayName: this.user.displayName
+            },
+            eoiStudent
+          });
       });
     this.router.navigateByUrl('student');
   }

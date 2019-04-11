@@ -10,6 +10,7 @@ import { EoiBusiness } from '../model/eoi-business';
 import { EoiBusinessService } from '../services/eoi-business.service';
 import { UserProfile } from '../model/user-profile';
 import { UniversityTodoService } from '../services/university-todo.service';
+import { EventStoreService } from '../services/event-store.service';
 
 export interface Semester {
   number: number;
@@ -48,7 +49,8 @@ export class EoiBusinessComponent implements OnInit {
     private afs: AngularFirestore,
     private snackBar: MatSnackBar,
     private eoiBusinessService: EoiBusinessService,
-    private universityTodoService: UniversityTodoService
+    private universityTodoService: UniversityTodoService,
+    private eventStoreService: EventStoreService
   ) { }
 
   ngOnInit() {
@@ -152,6 +154,14 @@ export class EoiBusinessComponent implements OnInit {
           .add({ title: 'Placement request received', eoiBusiness })
           .then(() => this.openSnackBar('Thank you for applying to your project'))
           .catch(() => this.openSnackBar('ERROR: failed to submit application'));
+        this.eventStoreService
+          .add({
+            event: 'Business applied for placement',
+            user: {
+              uid: this.user.uid,
+              displayName: this.user.displayName
+            }, eoiBusiness
+          });
       });
     this.router.navigateByUrl('business');
   }

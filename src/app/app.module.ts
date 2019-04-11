@@ -45,6 +45,7 @@ import { EoiStudentService } from './services/eoi-student.service';
 import { UniversityComponent } from './university/university.component';
 import { UniversityTodoComponent } from './university-todo/university-todo.component';
 import { UniversityTodoService } from './services/university-todo.service';
+import { EventStoreService } from './services/event-store.service';
 import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-eoi.component';
 
 @NgModule({
@@ -100,7 +101,8 @@ import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-e
     ProjectService,
     EoiBusinessService,
     EoiStudentService,
-    UniversityTodoService
+    UniversityTodoService,
+    EventStoreService
   ],
   bootstrap: [AppComponent]
 })
