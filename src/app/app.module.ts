@@ -23,6 +23,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ import { UniversityTodoComponent } from './university-todo/university-todo.compo
 import { UniversityTodoService } from './services/university-todo.service';
 import { EventStoreService } from './services/event-store.service';
 import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-eoi.component';
+import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-e
     LoginComponent,
     UniversityComponent,
     UniversityTodoComponent,
-    ReviewStudentEoiComponent
+    ReviewStudentEoiComponent,
+    EventsViewerComponent
   ],
   entryComponents: [
     ProjectEditDialogComponent
@@ -95,6 +98,7 @@ import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-e
     MatStepperModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatExpansionModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

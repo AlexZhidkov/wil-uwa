@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { UniversityComponent } from './university/university.component';
 import { UniversityTodoComponent } from './university-todo/university-todo.component';
 import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-eoi.component';
+import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 
 const routes: Routes = [
   { path: 'university', component: UniversityComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'business/:id', component: ProjectGroupComponent },
   { path: 'reviewStudentEoi/:uid/:id', component: ReviewStudentEoiComponent },
   { path: 'projectGroupEdit/:id', component: ProjectGroupEditComponent },
+  { path: 'events', component: EventsViewerComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', component: ProjectsComponent }
 ];
