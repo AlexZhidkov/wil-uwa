@@ -10,6 +10,9 @@ import { EoiBusinessService } from '../services/eoi-business.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  faculties: string[];
+  faculty: string;
+  isStudent: boolean;
 
   constructor(public authService: AuthService,
               private router: Router,
@@ -17,33 +20,39 @@ export class LoginComponent implements OnInit {
               public eoiBusinessService: EoiBusinessService) { }
 
   ngOnInit() {
+    this.isStudent = localStorage.getItem('userPrimaryRole') === 'student';
+    this.faculties = ['Marketing', 'Engineering'];
   }
 
   loginFacebook() {
     if (this.eoiStudentService.getEoiStudentPath() != null) {
-      this.authService.loginWithFacebook().then(() => this.router.navigate(
-        [this.eoiStudentService.getEoiStudentPath()]));
+      this.authService.loginWithFacebook()
+        .then(() => this.router.navigate([this.eoiStudentService.getEoiStudentPath()]));
     } else if (this.eoiBusinessService.getEoiBusinessPath() != null) {
-      this.authService.loginWithFacebook().then(() => this.router.navigate(
-        [this.eoiBusinessService.getEoiBusinessPath()]));
+      this.authService.loginWithFacebook()
+        .then(() => this.router.navigate([this.eoiBusinessService.getEoiBusinessPath()]));
     } else if (this.authService.isStudent) {
-      this.authService.loginWithFacebook().then(() => this.router.navigate(['student']));
+      this.authService.loginWithFacebook()
+        .then(() => this.router.navigate(['student']));
     } else if (this.authService.isBusiness) {
-      this.authService.loginWithFacebook().then(() => this.router.navigate(['business']));
+      this.authService.loginWithFacebook()
+        .then(() => this.router.navigate(['business']));
     }
   }
 
   loginGoogle() {
     if (this.eoiStudentService.getEoiStudentPath() != null) {
-      this.authService.loginWithGoogle().then(() => this.router.navigate(
-        [this.eoiStudentService.getEoiStudentPath()]));
+      this.authService.loginWithGoogle()
+        .then(() => this.router.navigate([this.eoiStudentService.getEoiStudentPath()]));
     } else if (this.eoiBusinessService.getEoiBusinessPath() != null) {
-      this.authService.loginWithGoogle().then(() => this.router.navigate(
-        [this.eoiBusinessService.getEoiBusinessPath()]));
+      this.authService.loginWithGoogle()
+        .then(() => this.router.navigate([this.eoiBusinessService.getEoiBusinessPath()]));
     } else if (this.authService.isStudent) {
-      this.authService.loginWithGoogle().then(() => this.router.navigate(['student']));
+      this.authService.loginWithGoogle()
+        .then(() => this.router.navigate(['student']));
     } else if (this.authService.isBusiness) {
-      this.authService.loginWithGoogle().then(() => this.router.navigate(['business']));
+      this.authService.loginWithGoogle()
+        .then(() => this.router.navigate(['business']));
     }
   }
 }
