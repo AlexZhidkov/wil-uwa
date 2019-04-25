@@ -27,7 +27,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProjectsComponent } from './projects/projects.component';
+import { StudentComponent } from './student-landing-page/student.component';
 import { ProjectEditDialogComponent } from './project-edit-dialog/project-edit-dialog.component';
 import { ProjectService } from './services/project.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -54,7 +54,7 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectsComponent,
+    StudentComponent,
     ProjectEditDialogComponent,
     ProjectComponent,
     EoiBusinessComponent,

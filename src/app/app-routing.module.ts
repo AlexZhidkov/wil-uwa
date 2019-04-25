@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { ProjectsComponent } from './projects/projects.component';
+import { StudentComponent } from './student-landing-page/student.component';
 import { ProjectComponent } from './project/project.component';
 import { EoiBusinessComponent } from './eoi-business/eoi-business.component';
 import { ProjectGroupsComponent } from './project-groups/project-groups.component';
@@ -21,7 +21,7 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: 'university', component: UniversityComponent },
   { path: 'university/todo/:id', component: UniversityTodoComponent },
-  { path: 'student', component: ProjectsComponent },
+  { path: 'student', component: StudentComponent },
   { path: 'student/profile', component: ProfileStudentComponent }, // canActivate: [AuthService] },
   { path: 'student/eoi/:id/:businessId/:isNewProject', component: EoiStudentComponent }, // canActivate: [AuthService] },
   { path: 'student/eoi/:eoiId', component: EoiStudentComponent }, // canActivate: [AuthService] },

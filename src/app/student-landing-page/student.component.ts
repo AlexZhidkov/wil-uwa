@@ -6,11 +6,11 @@ import { Project } from '../model/project';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class StudentComponent implements OnInit {
   projects: Observable<Project[]>;
   isLoading: boolean;
 
