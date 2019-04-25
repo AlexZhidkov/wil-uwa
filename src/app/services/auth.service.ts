@@ -33,21 +33,14 @@ export class AuthService implements CanActivate {
       if (authUser) {
         localStorage.setItem('user', JSON.stringify(authUser));
         this.userDoc = this.afs.doc<UserProfile>('users/' + authUser.uid);
-        if (eoiStudentService.getEoiStudentPath()) {
-          this.userDoc.set({
-            displayName: authUser.displayName,
-            email: authUser.email,
-            photoURL: authUser.photoURL,
-            isStudent: true,
-          }, { merge: true });
-        } else if (eoiBusinessService.getEoiBusinessPath()) {
-          this.userDoc.set({
-            displayName: authUser.displayName,
-            email: authUser.email,
-            photoURL: authUser.photoURL,
-            isBusiness: true,
-          }, { merge: true });
-        }
+        this.userDoc.set({
+          displayName: authUser.displayName,
+          email: authUser.email,
+          photoURL: authUser.photoURL,
+          primaryRole: localStorage.getItem('userPrimaryRole'),
+          university: localStorage.getItem('university'),
+          faculty: localStorage.getItem('faculty')
+        }, { merge: true });
         this.isLoggedIn = true;
         this.emitInitialDetails(this.isLoggedIn, authUser.photoURL);
       } else {

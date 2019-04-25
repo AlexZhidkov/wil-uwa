@@ -12,12 +12,15 @@ export class LoginComponent implements OnInit {
   faculty: string;
   userPrimaryRole: string;
   showUserPrimaryRoleSelector: boolean;
+  studentUniversity: string;
 
   constructor(public authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
     this.userPrimaryRole = localStorage.getItem('userPrimaryRole');
+    this.studentUniversity = localStorage.getItem('university');
+    this.faculty = localStorage.getItem('faculty');
     this.showUserPrimaryRoleSelector = !Boolean(this.userPrimaryRole);
 
     this.faculties = [
@@ -32,19 +35,27 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('userPrimaryRole', role);
   }
 
-  loginFacebook() {
-    this.authService.loginWithFacebook()
-      .then(() => this.redirectAfterLogin());
-  }
+  login(provider: string) {
+    localStorage.setItem('university', this.studentUniversity);
+    localStorage.setItem('userPrimaryRole', this.userPrimaryRole);
+    localStorage.setItem('faculty', this.faculty);
 
-  loginGoogle() {
-    this.authService.loginWithGoogle()
-      .then(() => this.redirectAfterLogin());
+    switch (provider) {
+      case 'facebook': {
+        this.authService.loginWithFacebook()
+          .then(() => this.redirectAfterLogin());
+        break;
+      }
+      case 'google': {
+        this.authService.loginWithGoogle()
+          .then(() => this.redirectAfterLogin());
+        break;
+      }
+    }
   }
 
   redirectAfterLogin() {
-    const userPrimaryRole = localStorage.getItem('userPrimaryRole');
-    const redirectAfterLoginPath = userPrimaryRole ? userPrimaryRole : '/';
+    const redirectAfterLoginPath = this.userPrimaryRole ? this.userPrimaryRole : '/';
     this.router.navigate([redirectAfterLoginPath]);
   }
 }

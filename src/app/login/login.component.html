@@ -21,7 +21,7 @@
     <h4>Please chose your faculty</h4>
     <mat-form-field>
       <mat-label>Faculty</mat-label>
-      <mat-select>
+      <mat-select [(ngModel)]="faculty">
         <mat-option *ngFor="let faculty of faculties" [value]="faculty">
           {{faculty}}
         </mat-option>
@@ -29,10 +29,10 @@
     </mat-form-field>
   </div>
 
-  <button mat-raised-button class="facebook-block-button" (click)="loginFacebook()">
+  <button mat-raised-button class="facebook-block-button" (click)="login('facebook')">
     <span> Sign In With Facebook </span>
   </button>
-  <button mat-raised-button class="google-block-button" (click)="loginGoogle()">
+  <button mat-raised-button class="google-block-button" (click)="login('google')">
     <img class="google-icon" alt="Google &quot;G&quot; Logo"
       src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
     <span> Sign In With Google </span>
