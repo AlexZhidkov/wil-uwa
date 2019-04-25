@@ -6,11 +6,11 @@ import { ProjectGroup } from '../model/project-group';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-project-groups',
-  templateUrl: './project-groups.component.html',
-  styleUrls: ['./project-groups.component.scss']
+  selector: 'app-business',
+  templateUrl: './business.component.html',
+  styleUrls: ['./business.component.scss']
 })
-export class ProjectGroupsComponent implements OnInit {
+export class BusinessComponent implements OnInit {
   projectGroups: Observable<ProjectGroup[]>;
   isLoading: boolean;
   areas = [

@@ -33,7 +33,7 @@ import { ProjectService } from './services/project.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ProjectComponent } from './project/project.component';
 import { EoiBusinessComponent } from './eoi-business/eoi-business.component';
-import { ProjectGroupsComponent } from './project-groups/project-groups.component';
+import { BusinessComponent } from './business-landing-page/business.component';
 import { ProjectGroupComponent } from './project-group/project-group.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { ProjectGroupEditComponent } from './project-group-edit/project-group-edit.component';
@@ -58,7 +58,7 @@ import { HomeComponent } from './home/home.component';
     ProjectEditDialogComponent,
     ProjectComponent,
     EoiBusinessComponent,
-    ProjectGroupsComponent,
+    BusinessComponent,
     ProjectGroupComponent,
     ProjectEditComponent,
     ProjectGroupEditComponent,
