@@ -10,19 +10,26 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   faculties: string[];
   faculty: string;
-  isStudent: boolean;
+  userPrimaryRole: string;
+  showUserPrimaryRoleSelector: boolean;
 
   constructor(public authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
-    this.isStudent = localStorage.getItem('userPrimaryRole') === 'student';
+    this.userPrimaryRole = localStorage.getItem('userPrimaryRole');
+    this.showUserPrimaryRoleSelector = !Boolean(this.userPrimaryRole);
+
     this.faculties = [
       'Business, Operations/Consulting',
       'Marketing',
       'Accounting',
       'Human Resources'
     ];
+  }
+
+  updateUserPrimaryRole(role: string) {
+    localStorage.setItem('userPrimaryRole', role);
   }
 
   loginFacebook() {
