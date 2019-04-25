@@ -30,6 +30,9 @@ export class ProjectGroupsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    if (!localStorage.getItem('userPrimaryRole')) {
+      localStorage.setItem('userPrimaryRole', 'business');
+    }
     this.projectService.setCollection('projectGroups');
     this.projectGroups = this.projectService.list();
     this.projectGroups.subscribe(e => {

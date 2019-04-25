@@ -24,6 +24,10 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    if (!localStorage.getItem('userPrimaryRole')) {
+      localStorage.setItem('userPrimaryRole', 'student');
+    }
+
     this.projectId = this.route.snapshot.paramMap.get('id');
     this.projectDoc = this.afs.doc<Project>('projects/' + this.projectId);
     this.project = this.projectDoc.valueChanges();

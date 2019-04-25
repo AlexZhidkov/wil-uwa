@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { EoiStudentService } from '../services/eoi-student.service';
-import { EoiBusinessService } from '../services/eoi-business.service';
 
 @Component({
   selector: 'app-login',
@@ -15,44 +13,31 @@ export class LoginComponent implements OnInit {
   isStudent: boolean;
 
   constructor(public authService: AuthService,
-              private router: Router,
-              public eoiStudentService: EoiStudentService,
-              public eoiBusinessService: EoiBusinessService) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.isStudent = localStorage.getItem('userPrimaryRole') === 'student';
-    this.faculties = ['Marketing', 'Engineering'];
+    this.faculties = [
+      'Business, Operations/Consulting',
+      'Marketing',
+      'Accounting',
+      'Human Resources'
+    ];
   }
 
   loginFacebook() {
-    if (this.eoiStudentService.getEoiStudentPath() != null) {
-      this.authService.loginWithFacebook()
-        .then(() => this.router.navigate([this.eoiStudentService.getEoiStudentPath()]));
-    } else if (this.eoiBusinessService.getEoiBusinessPath() != null) {
-      this.authService.loginWithFacebook()
-        .then(() => this.router.navigate([this.eoiBusinessService.getEoiBusinessPath()]));
-    } else if (this.authService.isStudent) {
-      this.authService.loginWithFacebook()
-        .then(() => this.router.navigate(['student']));
-    } else if (this.authService.isBusiness) {
-      this.authService.loginWithFacebook()
-        .then(() => this.router.navigate(['business']));
-    }
+    this.authService.loginWithFacebook()
+      .then(() => this.redirectAfterLogin());
   }
 
   loginGoogle() {
-    if (this.eoiStudentService.getEoiStudentPath() != null) {
-      this.authService.loginWithGoogle()
-        .then(() => this.router.navigate([this.eoiStudentService.getEoiStudentPath()]));
-    } else if (this.eoiBusinessService.getEoiBusinessPath() != null) {
-      this.authService.loginWithGoogle()
-        .then(() => this.router.navigate([this.eoiBusinessService.getEoiBusinessPath()]));
-    } else if (this.authService.isStudent) {
-      this.authService.loginWithGoogle()
-        .then(() => this.router.navigate(['student']));
-    } else if (this.authService.isBusiness) {
-      this.authService.loginWithGoogle()
-        .then(() => this.router.navigate(['business']));
-    }
+    this.authService.loginWithGoogle()
+      .then(() => this.redirectAfterLogin());
+  }
+
+  redirectAfterLogin() {
+    const userPrimaryRole = localStorage.getItem('userPrimaryRole');
+    const redirectAfterLoginPath = userPrimaryRole ? userPrimaryRole : '/';
+    this.router.navigate([redirectAfterLoginPath]);
   }
 }

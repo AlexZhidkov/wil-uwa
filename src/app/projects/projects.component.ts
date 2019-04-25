@@ -22,6 +22,9 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    if (!localStorage.getItem('userPrimaryRole')) {
+      localStorage.setItem('userPrimaryRole', 'student');
+    }
     this.projectService.setCollection('projects');
     this.projects = this.projectService.list();
     this.projects.subscribe(e => {
