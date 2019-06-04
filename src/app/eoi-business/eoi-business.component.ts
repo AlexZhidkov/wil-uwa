@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +10,7 @@ import { EoiBusinessService } from '../services/eoi-business.service';
 import { UserProfile } from '../model/user-profile';
 import { UniversityTodoService } from '../services/university-todo.service';
 import { EventStoreService } from '../services/event-store.service';
+import { DataService } from '../services/data.service';
 
 export interface Semester {
   number: number;
@@ -34,20 +34,20 @@ export class EoiBusinessComponent implements OnInit {
   eoiBusinessUrl: string;
   projectId: string;
   eoiId: string;
-  isNewProject: boolean;
+  isNewProject = true;
   eoiDoc: AngularFirestoreDocument<EoiBusiness>;
   eoi: Observable<EoiBusiness>;
   isLoading: boolean;
   previouslySubmittedEois: Observable<EoiBusiness[]>;
 
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private formBuilder: FormBuilder,
     private afs: AngularFirestore,
     private snackBar: MatSnackBar,
+    private dataService: DataService,
     private eoiBusinessService: EoiBusinessService,
     private universityTodoService: UniversityTodoService,
     private eventStoreService: EventStoreService
@@ -67,7 +67,11 @@ export class EoiBusinessComponent implements OnInit {
 
     this.projectId = this.route.snapshot.paramMap.get('id');
     this.eoiId = this.route.snapshot.paramMap.get('eoiId');
-    this.isNewProject = (this.route.snapshot.paramMap.get('isNewProject') === 'true');
+    if (this.route.snapshot.paramMap.get('isNewProject') === 'true') {
+      this.isNewProject = true;
+    } else if (this.projectId) {
+      this.isNewProject = false;
+    }
 
     this.semesters = [
       { number: 1, dates: 'Semester 1. 25 February - 	24 May' },
@@ -90,6 +94,7 @@ export class EoiBusinessComponent implements OnInit {
           skills: '',
           clearance: '',
           name: '',
+          abn: '',
           website: '',
           primaryContact: '',
           address: '',
@@ -123,6 +128,7 @@ export class EoiBusinessComponent implements OnInit {
       });
       this.employerFormGroup = this.formBuilder.group({
         nameCtrl: [r.name, Validators.required],
+        abnCtrl: [r.abn],
         websiteCtrl: [r.website],
         primaryContactCtrl: [r.primaryContact, Validators.required],
         addressCtrl: [r.address],
@@ -151,7 +157,10 @@ export class EoiBusinessComponent implements OnInit {
         const eoiBusiness = eoiBusinessSnapshot.data() as EoiBusiness;
         this.universityTodoService.setCollection('universities/uwa/todo');
         this.universityTodoService
-          .add({ title: 'Placement request received', eoiBusiness })
+          .add({
+            created: this.dataService.getTimestamp(new Date()),
+            title: 'Placement request received', eoiBusiness
+          })
           .then(() => this.openSnackBar('Thank you for applying to your project'))
           .catch(() => this.openSnackBar('ERROR: failed to submit application'));
         this.eventStoreService

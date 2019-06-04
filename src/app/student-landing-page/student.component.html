@@ -1,23 +1,146 @@
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar>
-      <mat-icon>build</mat-icon>
-    </div>
-    <mat-card-title>Projects</mat-card-title>
-    <mat-card-subtitle>Show your interest in a project</mat-card-subtitle>
-  </mat-card-header>
-  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-  <mat-nav-list>
-    <mat-list-item routerLink="/business/eoi/self-sourced/true">
-      Self sourced project
-    </mat-list-item>
-  </mat-nav-list>
-  <mat-nav-list>
-    <mat-list-item *ngFor="let project of projects | async" routerLink="/student/{{project.id}}">
-      {{ project.title }}
-    </mat-list-item>
-  </mat-nav-list>
-  <button mat-fab>
-    <mat-icon aria-label="Add" (click)="addNewProject()">add</mat-icon>
-  </button>
-</mat-card>
+<mat-sidenav-container>
+  <mat-sidenav #helpSidenav mode="over" position="end" [fixedInViewport]="true">
+    <app-student-help (closeButtonClicked)="helpSidenav.close()"></app-student-help>
+  </mat-sidenav>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar>school</mat-icon>
+      <mat-card-title>Student Dashboard</mat-card-title>
+      <span class="fill-space"></span>
+      <button mat-icon-button aria-label="Help" (click)="helpSidenav.open()">
+        <mat-icon>help</mat-icon>
+      </button>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-accordion>
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Academic Requirements</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          Complete this section before internship start date
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <button mat-button color="accent" style="font-size: 28px;" routerLink="/student/start">
+        ACCESS HERE
+      </button>
+      <button mat-mini-fab color="accent" routerLink="/student/start">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <p>
+        Before you start your internship you must complete getting started section.
+      </p>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>My Internships</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          All your internship applications
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-list-item routerLink="/project/selfSourced/{{user.uid}}">
+          <h3 matLine>
+            <mat-icon>pause</mat-icon> Submitted self-sourced internship
+          </h3>
+          <p matLine> Description of my self-sourced internship here ... </p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/project/bespoke/{{user.uid}}">
+          <mat-icon style="color: green">done_outline</mat-icon>
+          Submitted bespoke EOI
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/project/projects/lCXobWn1MMeOwBSiKdDr">
+          <mat-icon>pause</mat-icon>
+          Market Research at Vistario
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-action-row>
+        <button mat-raised-button routerLink="/projects">Apply for Internship</button>
+        <button mat-raised-button routerLink="/student/form/self-sourced">Bring Your Own</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Internship Feedback</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          Complete at 30hrs & Finish
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-list-item routerLink="/survey">
+          <mat-icon>check_box</mat-icon>
+          30 hour feedback
+        </mat-list-item>
+        <mat-list-item routerLink="/survey">
+          <mat-icon>check_box_outline_blank</mat-icon>
+          Final feedback
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Internship Updates</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          Latest news on your internship
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <h3 matLine>
+            <mat-icon style="color: green">done_outline</mat-icon> 30 hr survey complete
+            Congratulations!
+          </h3>
+          <p matLine> Your internship application was accepted by XYZ Business. Keep an eye on your updates/emails for
+            further actions. </p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <h3 matLine>
+            <mat-icon>pause</mat-icon> Pending Approval
+          </h3>
+          <p matLine>Your internship application is currently being reviewed. Please be patient and check back in
+            regularly
+            for updates.</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <h3 matLine>
+            <mat-icon style="color: green">done_outline</mat-icon> 30 hr survey complete
+          </h3>
+          <p matLine> Congratulations, you've completed... </p>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Help Finding Internship</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          Easy start section
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>
+        Can't find a internship? Maybe you need some inspiration? Complete expression of interest form here.
+      </p>
+      <button mat-button color="accent" style="font-size: 28px;" routerLink="/student/form/bespoke">
+        GET STARTED
+      </button>
+      <button mat-mini-fab color="accent" routerLink="/student/form/bespoke">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-sidenav-container>

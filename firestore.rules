@@ -1,7 +1,39 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
+    match /events/{document=**} {
+      allow read, write: if request.auth.uid != null;
+    }
+    match /projectGroups/{document=**} {
+      allow read: if true;      
+      allow write: if request.auth.uid != null;
+    }
+    match /projects/{document=**} {
+      allow read: if true;      
+      allow write: if request.auth.uid != null;
+    }
+		match /selfSourced/{document=**} {
+      allow read: if request.auth.uid != null;   
+      allow write: if request.auth.uid != null;
+    }
+		match /bespoke/{document=**} {
+      allow read: if request.auth.uid != null;   
+      allow write: if request.auth.uid != null;
+    }
+		match /projectEoi/{document=**} {
+      allow read: if request.auth.uid != null;   
+      allow write: if request.auth.uid != null;
+    }
+    match /universities/{document=**} {
+      allow read, write: if request.auth.uid != null;
+    }
+		match /emails/{document=**} {
+      allow write: if request.auth.uid != null;
+    }
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId
+    }
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth.uid == userId
     }
   }
 }

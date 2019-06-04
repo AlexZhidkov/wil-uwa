@@ -1,16 +1,84 @@
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar>
-      <mat-icon>list</mat-icon>
+<mat-tab-group>
+  <mat-tab label="Home">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="school">
+        <th mat-header-cell *matHeaderCellDef> School </th>
+        <td mat-cell *matCellDef="let element"> {{element.school}} </td>
+      </ng-container>
+      <ng-container matColumnDef="students">
+        <th mat-header-cell *matHeaderCellDef> Students </th>
+        <td mat-cell *matCellDef="let element"> {{element.students}} </td>
+      </ng-container>
+      <ng-container matColumnDef="hosts">
+        <th mat-header-cell *matHeaderCellDef> Hosts </th>
+        <td mat-cell *matCellDef="let element"> {{element.hosts}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-form-field>
+      <input matInput placeholder="Find Student">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Find Business">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Find Internship">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button routerLink="/business/eoi/blank">Create new internship</button>
+  </mat-tab>
+
+  <mat-tab label="To Do">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <div fxLayout="row">
+      <span class="fill-space"></span>
+      <button mat-raised-button [matMenuTriggerFor]='filterMenu'>
+        Filter
+      </button>
+      <mat-menu #filterMenu="matMenu">
+        <button mat-menu-item>Agreement Renewals</button>
+        <button mat-menu-item>Self Sourced Approvals</button>
+        <button mat-menu-item>Help Requests</button>
+        <button mat-menu-item>Student Without Internship</button>
+        <button mat-menu-item>Vacant Internship</button>
+        <button mat-menu-item>Incomplete Internship</button>
+        <button mat-menu-item>Communications</button>
+      </mat-menu>
+      <button mat-raised-button [matMenuTriggerFor]='sortMenu'>
+        Sort
+      </button>
+      <mat-menu #sortMenu="matMenu">
+        <button mat-menu-item (click)="sortToDosByTitle()">By Title</button>
+        <button mat-menu-item (click)="sortToDosByTime()">By Time</button>
+      </mat-menu>
     </div>
-    <mat-card-title>To Do</mat-card-title>
-    <mat-card-subtitle>New items to complete</mat-card-subtitle>
-  </mat-card-header>
-  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-  <mat-nav-list>
-    <mat-list-item *ngFor="let todo of todos | async" routerLink="/university/todo/{{todo.id}}">
-      <h4 mat-line>{{ todo.title }}</h4>
-      <p mat-line> {{todo.eoiBusiness?.title}} </p>
-    </mat-list-item>
-  </mat-nav-list>
-</mat-card>
+
+    <mat-nav-list>
+      <mat-list-item *ngFor="let todo of todos | async" routerLink="/university/todo/{{todo.id}}">
+        <h4 mat-line>{{todo.title}}</h4>
+        <p mat-line>
+          {{timestampToString(todo.created) | date: 'd LLL yy, h:mm a'}}.
+          {{todo.eoiBusiness?.title}} {{todo.project?.hostName}}
+          {{todo.student?.displayName}} {{todo.selfSourced?.studentName}}
+        </p>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-tab>
+
+  <mat-tab label="Reports">
+    <iframe width="940" height="650"
+      src="https://datastudio.google.com/embed/reporting/1d07CO6_hZHYOVFy6Epwm7QBM4llU45Fx/page/aIgL" frameborder="0"
+      style="border:0" allowfullscreen>
+    </iframe>
+  </mat-tab>
+  <mat-tab label="Events Log">
+    <app-events-viewer></app-events-viewer>
+  </mat-tab>
+  <mat-tab label="Help">
+    <app-university-help></app-university-help>
+  </mat-tab>
+</mat-tab-group>

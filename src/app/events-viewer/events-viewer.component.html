@@ -1,21 +1,25 @@
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar>
-      <mat-icon>list</mat-icon>
-    </div>
-    <mat-card-title>Events Log</mat-card-title>
-    <mat-card-subtitle>Expand to see Event details</mat-card-subtitle>
-  </mat-card-header>
-  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let event of events | async">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ event.event }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <pre>{{event | json}}</pre>
-    </mat-expansion-panel>
-  </mat-accordion>
-</mat-card>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<div fxLayout="column" fxLayoutAlign=" end">
+  <button mat-raised-button [matMenuTriggerFor]='filterMenu'>
+    Filter
+  </button>
+  <mat-menu #filterMenu="matMenu">
+    <button mat-menu-item>Interviews</button>
+    <button mat-menu-item>Applications</button>
+    <button mat-menu-item>Project Started</button>
+    <button mat-menu-item>30hr Feedback</button>
+    <button mat-menu-item>Final Feedback</button>
+    <button mat-menu-item>Project Closed</button>
+    <button mat-menu-item>Other</button>
+  </mat-menu>
+</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let event of events | async">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ event.event }} {{event.title}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <pre>{{event | json}}</pre>
+  </mat-expansion-panel>
+</mat-accordion>

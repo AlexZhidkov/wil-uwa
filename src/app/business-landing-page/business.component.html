@@ -1,27 +1,97 @@
-<mat-card>
-  <mat-card-header>
-    <div mat-card-avatar>
-      <mat-icon>folder_open</mat-icon>
-    </div>
-    <mat-card-title>Projects</mat-card-title>
-    <mat-card-subtitle>Choose one of the available projects</mat-card-subtitle>
-  </mat-card-header>
-  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-  <mat-form-field>
-    <mat-label>Area of interest</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let area of areas" [value]="area">
-        {{area}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<mat-sidenav-container>
+  <mat-sidenav #helpSidenav mode="over" position="end">
+    <app-business-help (closeButtonClicked)="helpSidenav.close()"></app-business-help>
+  </mat-sidenav>
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar>business</mat-icon>
+      <mat-card-title>Business Dashboard</mat-card-title>
+      <span class="fill-space"></span>
+      <button mat-icon-button aria-label="Help" (click)="helpSidenav.open()">
+        <mat-icon>help</mat-icon>
+      </button>
+    </mat-card-header>
+  </mat-card>
 
-  <mat-list>
-    <mat-list-item *ngFor="let projectGroup of projectGroups | async" routerLink="/business/{{projectGroup.id}}">
-      {{ projectGroup.title }}
-    </mat-list-item>
-  </mat-list>
-  <button mat-fab>
-    <mat-icon aria-label="Add" (click)="addNewProjectGroup()">add</mat-icon>
-  </button>
-</mat-card>
+  <mat-accordion>
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>My Internships</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          All your project applications
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-list-item routerLink="/project/self-sourced" *ngIf="selfSourcedProject">
+          <mat-icon>build</mat-icon>
+          Finish self-sourced project for {{selfSourcedProject.studentName}}
+        </mat-list-item>
+        <mat-list-item routerLink="/business/project/lCXobWn1MMeOwBSiKdDr">
+          <mat-icon style="color: green">done_outline</mat-icon>
+          Market Research at Vistario
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-action-row>
+        <button mat-raised-button routerLink="/business/eoi/blank">Create new project</button>
+        <button mat-raised-button routerLink="/project-groups">Find project</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Internship Feedback</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          Complete at 30hrs & Finish
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-list-item routerLink="/survey">
+          <mat-icon>check_box</mat-icon>
+          Provide feedback
+        </mat-list-item>
+        <mat-list-item routerLink="/survey">
+          <mat-icon>check_box_outline_blank</mat-icon>
+          Final feedback
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Internship Updates</strong>
+        </mat-panel-title>
+        <mat-panel-description fxShow.xs="false">
+          Latest news on your projects
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <h3 matLine>
+            <mat-icon style="color: green">done_outline</mat-icon> Congratulations!
+          </h3>
+          <p matLine> Your project application was accepted by XYZ Business. Keep an eye on your updates/emails for
+            further actions. </p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <h3 matLine>
+            <mat-icon>pause</mat-icon> Pending Approval
+          </h3>
+          <p matLine>Your project application is currently being reviewed. Please be patient and check back in regularly
+            for updates.</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/survey">
+          <h3 matLine>
+            <mat-icon style="color: green">done_outline</mat-icon> 30 hr survey complete
+          </h3>
+          <p matLine> Congratulations, you've completed... </p>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-sidenav-container>

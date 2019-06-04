@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
+  title: 'Experlio',
+  homeUrl: 'https://experlio.com',
   firebase: {
     apiKey: 'AIzaSyB_iMsjabkPAPjBotsvqLyXBToJl0t40YY',
     authDomain: 'wil-uwa.firebaseapp.com',

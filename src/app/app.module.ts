@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatNativeDateModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -25,6 +25,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import 'hammerjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +58,19 @@ import { EventStoreService } from './services/event-store.service';
 import { ReviewStudentEoiComponent } from './review-student-eoi/review-student-eoi.component';
 import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
+import { SelfSourcedProjectComponent } from './self-sourced-project/self-sourced-project.component';
+import { SurveyComponent } from './survey/survey.component';
+import { StudentProjectWizardComponent } from './student-project-wizard/student-project-wizard.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
+import { BusinessSelfSourcedProjectComponent } from './business-self-sourced-project/business-self-sourced-project.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { StudentGetStartedComponent } from './student-get-started/student-get-started.component';
+import { ProjectGroupsListComponent } from './project-groups-list/project-groups-list.component';
+import { BusinessProjectComponent } from './business-project/business-project.component';
+import { StudentHelpComponent } from './student-help/student-help.component';
+import { BusinessHelpComponent } from './business-help/business-help.component';
+import { UniversityHelpComponent } from './university-help/university-help.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +91,20 @@ import { HomeComponent } from './home/home.component';
     UniversityTodoComponent,
     ReviewStudentEoiComponent,
     EventsViewerComponent,
-    HomeComponent
+    HomeComponent,
+    SelfSourcedProjectComponent,
+    SurveyComponent,
+    StudentProjectWizardComponent,
+    ProjectViewComponent,
+    BusinessSelfSourcedProjectComponent,
+    ProjectsListComponent,
+    StudentGetStartedComponent,
+    ProjectGroupsListComponent,
+    BusinessProjectComponent,
+    StudentHelpComponent,
+    BusinessHelpComponent,
+    UniversityHelpComponent,
+    UserProfileComponent
   ],
   entryComponents: [
     ProjectEditDialogComponent
@@ -87,7 +120,20 @@ import { HomeComponent } from './home/home.component';
     AngularFireAuthModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MarkdownModule.forRoot(),
+    MarkdownModule.forRoot({
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          gfm: true,
+          tables: true,
+          breaks: true,
+          pedantic: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: false,
+        }
+      }
+    }),
     MatToolbarModule,
     MatSidenavModule,
     MatCardModule,
@@ -103,6 +149,13 @@ import { HomeComponent } from './home/home.component';
     MatSnackBarModule,
     MatExpansionModule,
     MatButtonToggleModule,
+    MatSliderModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatTableModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

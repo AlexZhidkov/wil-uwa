@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Internships
+    </mat-card-title>
+    <mat-card-subtitle>
+      Choose one to view and apply
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  <div fxLayout="column" fxLayoutAlign=" end">
+    <button mat-raised-button [matMenuTriggerFor]='filterMenu'>
+      Filter
+    </button>
+    <mat-menu #filterMenu="matMenu">
+      <button mat-menu-item>Semester 1 - (25/02 - June)</button>
+      <button mat-menu-item>Winter Semester - (17/06 - 24/06)</button>
+      <button mat-menu-item>Semester 2 - (29/07 - October)</button>
+      <button mat-menu-item>Summer - (25/11 - 18/02)</button>
+    </mat-menu>
+  </div>
+
+  <mat-nav-list>
+    <mat-list-item *ngFor="let project of projects | async" routerLink="/project/{{project.id}}">
+      <h3 matLine> {{project.title}} </h3>
+      <p matLine> {{project.subtitle}} </p>
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>

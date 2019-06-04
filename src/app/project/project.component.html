@@ -3,13 +3,16 @@
     <mat-card-title>
       <markdown [data]="(project | async)?.title"></markdown>
     </mat-card-title>
+    <mat-card-subtitle>
+      <markdown [data]="(project | async)?.subtitle"></markdown>
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
   <markdown [data]="(project | async)?.description"></markdown>
   <mat-card-actions>
     <div>
       <button mat-raised-button color="accent" (click)="storeProjectUrl(projectId)"
-        routerLink="/student/eoi/{{projectId}}/{{(project | async)?.businessId}}/true">Apply</button>
+        routerLink="/student/form/{{projectId}}">Apply</button>
       <button mat-icon-button>
         <mat-icon aria-label="Edit" routerLink="/projectEdit/{{projectId}}">edit</mat-icon>
       </button>
