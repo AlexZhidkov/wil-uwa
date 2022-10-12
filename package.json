@@ -27,7 +27,7 @@
     "@angular/service-worker": "^7.2.14",
     "@syncfusion/ej2-angular-calendars": "^17.1.43",
     "core-js": "^2.6.5",
-    "docxtemplater": "^3.10.1",
+    "docxtemplater": "^3.31.4",
     "file-saver": "^2.0.1",
     "firebase": "^5.11.1",
     "hammerjs": "^2.0.8",
